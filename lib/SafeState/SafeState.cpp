@@ -1,15 +1,15 @@
 /**
-   Arduino Electronic Safe
+   Caja Fuerte Electronica Arduino
 
    Copyright (C) 2020, Uri Shaked.
-   Released under the MIT License.
+   Publicado bajo la licencia MIT.
 */
 
 #include <Arduino.h>
 #include <EEPROM.h>
 #include "SafeState.h"
 
-/* Safe state */
+/* Estado seguro */
 #define EEPROM_ADDR_LOCKED   0
 #define EEPROM_ADDR_CODE_LEN 1
 #define EEPROM_ADDR_CODE     2
@@ -45,7 +45,8 @@ void SafeState::setCode(String newCode) {
 bool SafeState::unlock(String code) {
   auto codeLength = EEPROM.read(EEPROM_ADDR_CODE_LEN);
   if (codeLength == EEPROM_EMPTY) {
-    // There was no code, so unlock always succeeds
+/* No había ningún código, por lo que el
+desbloqueo siempre se realiza correctamente. */
     this->setLock(false);
     return true;
   }

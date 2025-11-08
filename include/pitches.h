@@ -1,6 +1,6 @@
 /**************************************************
-   This file defines constants with the frequency
-   of different musical notes.
+   Esta carpeta define constantes con la frecuencia
+   de diferentes notas musicales.
  *************************************************/
 
 #define NOTE_B0  31

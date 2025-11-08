@@ -1,8 +1,8 @@
 /**
-   Arduino Electronic Safe
+   Caja Fuerte Electronica Arduino
 
-   Copyright (C) 2020, Uri Shaked.
-   Released under the MIT License.
+ Copyright (C) 2020, Uri Shaked.
+ Publicado bajo la licencia MIT.
 */
 
 #include <LiquidCrystal.h>
@@ -11,16 +11,16 @@
 #include "SafeState.h"
 #include "icons.h"
 
-/* Locking mechanism definitions */
+/* Definiciones de mecanismos de bloqueo */
 #define SERVO_PIN 6
 #define SERVO_LOCK_POS   20
 #define SERVO_UNLOCK_POS 90
 Servo lockServo;
 
-/* Display */
+/* Display (pantalla) */
 LiquidCrystal lcd(12, 11, 10, 9, 8, 7);
 
-/* Keypad setup */
+/* Configuración del teclado */
 const byte KEYPAD_ROWS = 4;
 const byte KEYPAD_COLS = 4;
 byte rowPins[KEYPAD_ROWS] = {5, 4, 3, 2};
@@ -34,7 +34,7 @@ char keys[KEYPAD_ROWS][KEYPAD_COLS] = {
 
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, KEYPAD_ROWS, KEYPAD_COLS);
 
-/* SafeState stores the secret code in EEPROM */
+/* SafeState (lugarSeguro) almacena el código secreto en EEPROM */
 SafeState safeState;
 
 void lock() {
@@ -48,7 +48,7 @@ void unlock() {
 
 void showStartupMessage() {
   lcd.setCursor(4, 0);
-  lcd.print("Welcome!");
+  lcd.print("Bienvenido!");
   delay(1000);
 
   lcd.setCursor(0, 2);
@@ -88,12 +88,12 @@ void showWaitScreen(int delayMillis) {
 bool setNewCode() {
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Enter new code:");
+  lcd.print("Ingresa un nuevo codigo:");
   String newCode = inputSecretCode();
 
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("Confirm new code");
+  lcd.print("Confirma el nuevo codigo");
   String confirmCode = inputSecretCode();
 
   if (newCode.equals(confirmCode)) {
@@ -102,9 +102,9 @@ bool setNewCode() {
   } else {
     lcd.clear();
     lcd.setCursor(1, 0);
-    lcd.print("Code mismatch");
+    lcd.print("El código no coincide");
     lcd.setCursor(0, 1);
-    lcd.print("Safe not locked!");
+    lcd.print("¡La caja fuerte no esta cerrada!");
     delay(2000);
     return false;
   }
@@ -115,7 +115,7 @@ void showUnlockMessage() {
   lcd.setCursor(0, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
   lcd.setCursor(4, 0);
-  lcd.print("Unlocked!");
+  lcd.print("Desbloqueado!");
   lcd.setCursor(15, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
   delay(1000);
@@ -127,7 +127,7 @@ void safeUnlockedLogic() {
   lcd.setCursor(0, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
   lcd.setCursor(2, 0);
-  lcd.print(" # to lock");
+  lcd.print(" # para bloquear");
   lcd.setCursor(15, 0);
   lcd.write(ICON_UNLOCKED_CHAR);
 
@@ -135,7 +135,7 @@ void safeUnlockedLogic() {
 
   if (safeState.hasCode()) {
     lcd.setCursor(0, 1);
-    lcd.print("  A = new code");
+    lcd.print("  A = nuevo codigo");
     newCodeNeeded = false;
   }
 
@@ -168,7 +168,7 @@ void safeLockedLogic() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.write(ICON_LOCKED_CHAR);
-  lcd.print(" Safe Locked! ");
+  lcd.print(" Caja fuerte cerrada! ");
   lcd.write(ICON_LOCKED_CHAR);
 
   String userCode = inputSecretCode();
@@ -181,7 +181,7 @@ void safeLockedLogic() {
   } else {
     lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("Access Denied!");
+    lcd.print("Acceso denegado!");
     showWaitScreen(1000);
   }
 }
@@ -192,7 +192,8 @@ void setup() {
 
   lockServo.attach(SERVO_PIN);
 
-  /* Make sure the physical lock is sync with the EEPROM state */
+  /* Asegúrese de que la cerradura física esté sincronizada
+   con el estado de EEPROM */
   Serial.begin(115200);
   if (safeState.locked()) {
     lock();

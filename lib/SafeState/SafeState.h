@@ -1,8 +1,8 @@
 /**
-   Arduino Electronic Safe
+   Caja Fuerte Electronica Arduino
 
    Copyright (C) 2020, Uri Shaked.
-   Released under the MIT License.
+   Publicado bajo la licencia MIT..
 */
 
 #ifndef SAFESTATE_H

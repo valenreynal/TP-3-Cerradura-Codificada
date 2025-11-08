@@ -1,10 +1,10 @@
-This project implements an electronic safe, powered by an Arduino Uno.
+Este proyecto implementa una caja fuerte electrónica, alimentada por un Arduino Uno..
 
-The safe has three main components:
-An [16x02 LCD Monitor](https://wokwi.com/playground/lcd1602)
-and a [Membrane Keypad](https://wokwi.com/playground/keypad) for the
-user interface, and a Servo motor that powers the lock mechanism.
+La caja fuerte tiene tres componentes principales.:
+Un [16x02 LCD Monitor](https://wokwi.com/playground/lcd1602)
+y un [Membrane Keypad](https://wokwi.com/playground/keypad) para el
+interfaz de usuario, y un Servo motor que alimenta el mecanismo de bloqueo.
 
-The state of the safe (locked/unlocked), as well as the secret code
-are stored in the Arduino's [EEPROM](https://wokwi.com/playground/eeprom), so
-the code isn't wiped even when the power goes off.
+El estado de la caja fuerte (bloqueado/desbloqueado), así como el código secreto
+se almacenan en el Arduino [EEPROM](https://wokwi.com/playground/eeprom), entonces
+el código no se borra incluso cuando se corta la energía.
